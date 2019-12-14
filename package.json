@@ -9,7 +9,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@cubbit/enigma": "^1.0.1"
-  }
+  "dependencies": {}
 }

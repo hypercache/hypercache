@@ -106,6 +106,23 @@ const pair = async (pass = null) => {
   });
 };
 
+const sign = (priv, pass, data) => {
+  const signer = crypto.createSign("sha256");
+  signer.update(data);
+  signer.end();
+  console.log("in sign", data);
+
+  const signature = signer.sign({ key: priv, passphrase: pass });
+  return signature.toString("hex");
+};
+
+const verify = (pub, data, signature) => {
+  const verifier = crypto.createVerify("sha256");
+  verifier.update(data);
+  verifier.end();
+  return verifier.verify(pub, signature, "hex");
+};
+
 const uuid = () => {
   return (
     crypto.randomBytes(16).toString("hex") +
@@ -137,5 +154,7 @@ module.exports = {
   encryptSym: encrypt,
   decryptSym: decrypt,
   pair,
-  uuid
+  uuid,
+  sign,
+  verify
 };
